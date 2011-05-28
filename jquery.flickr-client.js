@@ -156,6 +156,21 @@
 	FlickrClient.prototype.tags_getListUser = function(options, callback) {
 		return this.request("flickr.tags.getListUser", options, callback);
 	};
+	
+	FlickrClient.prototype.getPhotoUrl = function(photo, size) {
+		size = size || "m";
+		return photo["url_"+size];
+	};
+
+	FlickrClient.prototype.getPhotoPageUrl = function(photo, photos) {
+		owner = 'owner' in photo ? photo['owner'] : null;
+		if (!owner && 'owner' in photos) {
+			owner = photos['owner'];
+		}
+
+		url = "http://www.flickr.com/photos/"+owner+"/"+photo['id'];
+		return url;
+	};
 
 	$.FlickrClient = FlickrClient;
 })(jQuery);

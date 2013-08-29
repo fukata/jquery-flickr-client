@@ -64,13 +64,16 @@
 		enablePathAlias: false
 	};
 	FlickrClient.prototype.SIZES = {
-		"sq": "url_sq",
-		"t": "url_t",
-		"s": "url_s",
-		"m": "url_m",
-		"z": "url_z",
-		"l": "url_l",
-		"o": "url_o"
+		"sq": "url_sq", // Square
+		"q": "url_q",   // Large Square
+		"t": "url_t",   // Thumbnail 
+		"s": "url_s",   // Small
+		"n": "url_n",   // Small 320
+		"m": "url_m",   // Medium 
+		"z": "url_z",   // Medium 640
+		"c": "url_c",   // Medium 800
+		"l": "url_l",   // Large
+		"o": "url_o"    // Original
 	}
 	FlickrClient.prototype.SIZES_ARRAY = hkeys(FlickrClient.prototype.SIZES); 
 	

@@ -96,10 +96,12 @@
      * @param params
      *            Send parameters
      * @param callback
-     *            callback function
+     *            Success callback function
+     * @param errorCallback
+     *            Error callback function
      * @returns
      */
-    FlickrClient.prototype.request = function(method, params, callback) {
+    FlickrClient.prototype.request = function(method, params, callback, errorCallback) {
         params = $.extend({
             method: method,
             format: "json",
@@ -135,10 +137,11 @@
             cache: true,
             dataType: "jsonp",
             jsonp: "jsoncallback",
-            jsonpCallback: callbackName,
-            error: function(request, textStatus, errorThrown) {
-            }
+            jsonpCallback: callbackName
         };
+        if ( $.isFunction(errorCallback) ) {
+            ajaxOption['error'] = errorCallback;
+        }
         
         return $.ajax(ajaxOption);
     };

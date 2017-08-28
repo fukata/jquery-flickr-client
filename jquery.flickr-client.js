@@ -3,6 +3,15 @@
  * */
 (function($) {
 
+  function generate_oauth_nonce(length) {
+    var text = "";
+    var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    for(var i = 0; i < length; i++) {
+        text += possible.charAt(Math.floor(Math.random() * possible.length));
+    }
+    return text;
+  }
+
   function hkeys(hash) {
     var keys = [];
     $.each(hash, function(key, val){
@@ -69,7 +78,7 @@
     apiKey: "",
     apiSecret: "",
     userId: "",
-    oauthToken: "",
+    authToken: "",
     restEndpoint: "https://api.flickr.com/services/rest/",
     enablePathAlias: false
   };
@@ -127,6 +136,12 @@
       oauth_token: this.options.oauthToken,
       user_id: this.options.userId
     }, params);
+    if (params.oauth_token) {
+      params['oauth_consumer_key'] = this.options.apiKey;
+      params['oauth_timestamp'] = Math.floor(new Date().getTime()/1000);
+      params['oauth_nonce'] = generate_oauth_nonce(32);
+      params['oauth_signature_method'] = 'HMAC-SHA1';
+    }
 
     var type = this.getHttpMethod(method);
     var url = this.options.restEndpoint;

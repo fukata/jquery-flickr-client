@@ -1,5 +1,5 @@
 ;
-/* jquery.flickr-client.js v1.1.0
+/* jquery.flickr-client.js v1.1.1
  * */
 (function($) {
 

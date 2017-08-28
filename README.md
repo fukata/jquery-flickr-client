@@ -5,4 +5,3 @@ JavaScript Flickr Client.
 1. dependency jQuery.
 
 # Change Log
-
